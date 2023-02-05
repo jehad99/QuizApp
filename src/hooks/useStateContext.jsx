@@ -23,7 +23,7 @@ export default function useStateContext() {
       localStorage.removeItem('context')
       setContext(getFreshContext())
     }
-    }
+  }
 }
 
 export function ContextProvider({children}) {

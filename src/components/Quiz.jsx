@@ -25,7 +25,6 @@ export default function Quiz() {
     temp.push({
       qnId,
       selected: optionIndex,
-      answer: qns[qnIndex].answer,
     })
     console.log([...temp])
     if (qnIndex < 4) {
@@ -78,7 +77,7 @@ export default function Quiz() {
           </Typography>
           <List>
             {qns[qnIndex].options.map((item, idx) => 
-              <ListItemButton key={idx} onClick={() => updateAnswer(qns[qnIndex].qnId, idx)}>
+              <ListItemButton key={idx} onClick={() => updateAnswer(qns[qnIndex].id, idx)}>
                 <div>
                   <b>{ String.fromCharCode(65+idx) + " . "}</b>{item}
                 </div>
