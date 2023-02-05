@@ -19,9 +19,7 @@ export default function Login() {
       createAPIEndpoint(ENDPOINTS.participants)
         .post(values)
         .then(res => {
-          console.log(res)
           setContext({ participantId: res.data.id })
-          console.log(context)
           //after login (participant post) we navigate to Quiz component see the Routes in App.jsx
           navigate('/quiz')
         })

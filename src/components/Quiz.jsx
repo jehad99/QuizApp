@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardMedia, LinearProgress, List, ListItem, ListItemButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { BASE_URL, createAPIEndpoint, ENDPOINTS } from '../api/api'
 import { getFormatedTime } from '../helper/getFormatedTime'
 import useStateContext from '../hooks/useStateContext'
@@ -9,7 +10,8 @@ export default function Quiz() {
   const [qns, setQns] = useState([])
   const [qnIndex, setQnIndex] = useState(0)
   const [timeTaken, setTimeTaken] = useState(0)
-  const {context, setContext} = useStateContext()
+  const { context, setContext } = useStateContext()
+  const navigate = useNavigate()
   let timer
 
   const startTimer = () => {
@@ -22,14 +24,17 @@ export default function Quiz() {
     const temp = [...context.selectedOptions]
     temp.push({
       qnId,
-      selected: optionIndex
+      selected: optionIndex,
+      answer: qns[qnIndex].answer,
     })
+    console.log([...temp])
     if (qnIndex < 4) {
       setContext({selectedOptions:[...temp]})
       setQnIndex(qnIndex + 1)
     }
     else {
-      setContext({selectedOptions:[...temp], timeTaken})
+      setContext({ selectedOptions: [...temp], timeTaken })
+      navigate("/result")
     }
   }
 
